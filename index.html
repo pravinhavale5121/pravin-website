@@ -1,75 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pravin Bappaji Havale - Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pravin Bappaji Havale – Premium Portfolio</title>
+
+<!-- Google Fonts & Icons -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
 <style>
-  :root {
-    --bg-dark:#0d1117; --bg-card:#161b22; --text:#e6edf3;
-    --accent:#238636; --light-bg:#f7f7f7; --light-card:#fff; --light-text:#000;
-  }
-  body { margin:0; font-family:Poppins, sans-serif; background:var(--bg-dark); color:var(--text); transition:0.3s; }
-  body.light { background:var(--light-bg); color:var(--light-text);} 
-  body.light .card { background:var(--light-card);} 
-  body.light nav { background:var(--light-card);} 
+/* ==============================
+   THEME VARIABLES
+============================== */
+:root {
+  --bg-dark:#0d1117; --bg-card:#161b22; --text:#e6edf3;
+  --accent:#2ecc71; --accent2:#27ae60; --border:#2b313a;
+  --light-bg:#f7f7f7; --light-card:#fff; --light-text:#000;
+}
 
-  /* PRELOADER */
-  #preloader { position:fixed; top:0; left:0; width:100%; height:100%; background:#000; display:flex; justify-content:center; align-items:center; z-index:200; }
+body {
+  margin:0; padding:0; font-family:Poppins, sans-serif;
+  background:var(--bg-dark); color:var(--text); transition:0.3s;
+}
+body.light { background:var(--light-bg); color:var(--light-text);} 
+body.light .card { background:var(--light-card);} 
+body.light nav { background:var(--light-card);} 
 
-  /* NAV */
-  nav { position:fixed; top:0; width:100%; padding:1rem 8%; background:var(--bg-card); display:flex; justify-content:space-between; align-items:center; z-index:20; backdrop-filter:blur(10px);} 
-  nav a { color:inherit; text-decoration:none; margin-left:1.5rem; font-weight:500; position:relative; }
-  nav a::after { content:""; position:absolute; bottom:-4px; left:0; width:0%; height:2px; background:var(--accent); transition:0.3s; }
-  nav a:hover::after { width:100%; }
+/* ==============================
+   PRELOADER
+============================== */
+#preloader {
+  position:fixed; top:0; left:0; width:100%; height:100%; background:#000;
+  display:flex; justify-content:center; align-items:center; z-index:200;
+}
+#preloader i { font-size:60px; color:var(--accent); }
 
-  /* THEME BUTTON */
-  #themeToggle { position:fixed; top:20px; right:20px; padding:0.6rem 0.8rem; background:var(--accent); color:white; border:none; border-radius:6px; cursor:pointer; z-index:50; }
+/* ==============================
+   NAVBAR
+============================== */
+nav {
+  position:fixed; top:0; width:100%; padding:1rem 8%; background:var(--bg-card);
+  display:flex; justify-content:space-between; align-items:center;
+  z-index:50; backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+nav a {
+  color:inherit; text-decoration:none; margin-left:2rem;
+  font-weight:500; position:relative; font-size:1.05rem;
+}
+nav a::after {
+  content:""; position:absolute; bottom:-6px; left:0;
+  width:0%; height:2px; background:var(--accent);
+  transition:0.3s;
+}
+nav a:hover::after { width:100%; }
 
-  /* Floating Contact */
-  #contact-btn { position:fixed; bottom:25px; right:25px; background:var(--accent); padding:1rem; border-radius:50%; color:white; cursor:pointer; font-size:22px; }
+/* Highlight active */
+.active-link::after { width:100%; }
 
-  /* HERO */
-  header { height:100vh; background:linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)), url('/mnt/data/photo (1).jpg') center/cover no-repeat; display:flex; justify-content:center; align-items:center; text-align:center; padding:0 10%; }
-  header h1 { font-size:4rem; margin:0; }
-  header p { font-size:1.3rem; opacity:0.8; }
-  .btn { display:inline-block; padding:0.8rem 1.6rem; background:var(--accent); color:white; border-radius:6px; text-decoration:none; font-weight:600; margin-top:1.5rem; }
+/* Theme Toggle */
+#themeToggle {
+  position:fixed; top:20px; right:20px;
+  padding:0.6rem 0.8rem; background:var(--accent);
+  color:#fff; border:none; border-radius:6px;
+  cursor:pointer; z-index:100;
+}
 
-  section { padding:6rem 10%; scroll-margin-top:80px; }
-  h2 { font-size:2.7rem; margin-bottom:2rem; }
+/* Floating contact */
+#contact-btn {
+  position:fixed; bottom:25px; right:25px;
+  background:var(--accent); padding:1rem;
+  border-radius:50%; font-size:22px;
+  cursor:pointer; color:white; z-index:100;
+}
 
-  .grid { display:grid; gap:2rem; }
-  .two { grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
-  .card { background:var(--bg-card); padding:2rem; border-radius:12px; transition:0.3s; }
-  .card:hover { transform:translateY(-6px); }
+/* ==============================
+   HERO SECTION
+============================== */
+header {
+  height:100vh;
+  background:#111;
+  display:flex; justify-content:center; align-items:center;
+  text-align:center; padding:0 10%; position:relative;
+}
+header h1 {
+  font-size:4rem; margin:0; font-weight:700;
+}
+header p {
+  font-size:1.3rem; opacity:0.85;
+}
+.btn {
+  display:inline-block; padding:1rem 2rem;
+  background:var(--accent); color:white;
+  border-radius:8px; text-decoration:none;
+  font-weight:600; margin-top:1.5rem;
+  transition:0.3s;
+}
+.btn:hover { background:var(--accent2); }
 
-  .timeline { border-left:3px solid var(--accent); padding-left:20px; }
-  .timeline-entry { margin-bottom:2rem; position:relative; }
-  .timeline-entry i { position:absolute; left:-37px; top:5px; font-size:20px; color:var(--accent); }
+/* ==============================
+   SECTION BASE
+============================== */
+section {
+  padding:6rem 10%; scroll-margin-top:100px;
+}
+h2 {
+  font-size:2.8rem; margin-bottom:2rem; font-weight:700;
+  position:relative;
+}
+h2::after {
+  content:""; width:80px; height:4px; background:var(--accent);
+  position:absolute; bottom:-10px; left:0; border-radius:2px;
+}
 
-  .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; }
-  .gallery-grid img { width:100%; border-radius:10px; }
+/* ==============================
+   CARDS & GRID
+============================== */
+.grid {
+  display:grid; gap:2rem;
+}
+.two { grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+.card {
+  background:var(--bg-card); padding:2rem; border-radius:12px;
+  transition:0.3s; border:1px solid var(--border);
+}
+.card:hover { transform:translateY(-6px); }
 
-  .cert-card { background:var(--bg-card); padding:1.5rem; border-radius:12px; cursor:pointer; }
+/* ==============================
+   TIMELINE
+============================== */
+.timeline {
+  border-left:3px solid var(--accent);
+  padding-left:25px;
+}
+.timeline-entry {
+  margin-bottom:2.5rem; position:relative;
+}
+.timeline-entry i {
+  position:absolute; left:-45px; top:5px;
+  font-size:22px; color:var(--accent);
+}
 
-  .modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:none; justify-content:center; align-items:center; z-index:100; }
-  .modal img { max-width:90%; max-height:90%; border-radius:12px; }
+/* ==============================
+   GALLERY
+============================== */
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+  gap:1.5rem;
+}
+.gallery-grid img {
+  width:100%; border-radius:12px; cursor:pointer;
+  border:2px solid var(--border);
+  transition:0.3s;
+}
+.gallery-grid img:hover { transform:scale(1.03); }
 
-  html { scroll-behavior:smooth; }
+/* ==============================
+   CERTIFICATES
+============================== */
+.cert-card {
+  background:var(--bg-card); padding:1rem;
+  border-radius:12px; text-align:center;
+  cursor:pointer; border:1px solid var(--border);
+  transition:0.3s;
+}
+.cert-card:hover { transform:translateY(-6px); }
+.cert-card img { width:100%; border-radius:10px; }
+
+/* ==============================
+   MODAL VIEWER
+============================== */
+.modal {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.85);
+  justify-content:center; align-items:center;
+  z-index:200;
+}
+.modal img {
+  max-width:90%; max-height:90%; border-radius:12px;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media(max-width:768px){
+  header h1 { font-size:2.6rem; }
+  nav a { margin-left:1rem; }
+}
 </style>
 </head>
 <body>
 
-<div id="preloader"><i class="fa-solid fa-gear fa-spin" style="font-size:50px;color:white"></i></div>
-
+<div id="preloader"><i class="fa-solid fa-spinner fa-spin"></i></div>
 <button id="themeToggle"><i class="fa-solid fa-moon"></i></button>
 <div id="contact-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">✉️</div>
 
 <nav>
-  <div class="logo">PBH</div>
+  <div class="logo"><strong>PBH</strong></div>
   <div>
     <a href="#home">Home</a>
     <a href="#about">About</a>
@@ -83,57 +213,44 @@
   </div>
 </nav>
 
-<header id="home" data-aos="fade-up">
-  <div>
+<header id="home">
+  <div data-aos="fade-up">
     <h1>Pravin Bappaji Havale</h1>
-    <p>Aeronautical Engineer • CFD Specialist • Robotics • Simulation</p>
+    <p>Aeronautical Engineer • CFD • Robotics • Simulation</p>
     <a class="btn" href="Pravin-Bappaji-Havale.pdf" download>Download CV</a>
   </div>
 </header>
 
+<!-- ==============================
+     ABOUT
+============================== -->
 <section id="about" data-aos="fade-right">
   <h2>About Me</h2>
-  <p>Motivated Aeronautical Engineering student with strong foundations in CFD, Robotics, Aerodynamics, Propulsion, and Structural Analysis.</p>
+  <p>Motivated Aeronautical Engineering student with strong foundations in CFD, Robotics, Propulsion, Heat Transfer, Aerodynamics, and Structural Analysis.</p>
 </section>
 
+<!-- ==============================
+     INTERNSHIPS (TIMELINE)
+============================== -->
 <section id="internships" data-aos="fade-left">
   <h2>Internships</h2>
   <div class="timeline">
     <div class="timeline-entry">
       <i class="fa-solid fa-gears"></i>
       <h3>S & I Engineering Solutions Pvt Ltd</h3>
-      <p>Grid generation • HiFUN simulations • ParaView visualization</p>
+      <p>HiFUN Grid Generation • Flow Simulation • Paraview</p>
     </div>
+
     <div class="timeline-entry">
       <i class="fa-solid fa-robot"></i>
       <h3>Center for Robotics Research, NMIT</h3>
-      <p>Hexapod robot development • Motion control • Aerospace robotics</p>
+      <p>Hexapod Design • Motion Control • Robotics Integration</p>
     </div>
   </div>
 </section>
 
+<!-- ==============================
+     PROJECTS + MODALS
+============================== -->
 <section id="projects" data-aos="zoom-in">
-  <h2>Projects</h2>
-  <div class="grid two">
-    <div class="card" onclick="openModal('/mnt/data/WhatsApp Image 2025-11-14 at 17.36.20_bdb4ad1e.jpg')"><h3>Scramjet Intake CFD</h3></div>
-    <div class="card" onclick="openModal('/mnt/data/WhatsApp Image 2025-11-14 at 17.57.41_7b74c076.jpg')"><h3>Fin-Tube Heat Transfer</h3></div>
-    <div class="card"><h3>NACA 0018 Airfoil</h3></div>
-    <div class="card"><h3>RIHAB Balloon</h3></div>
-    <div class="card"><h3>Hexapod Robot</h3></div>
-    <div class="card"><h3>Oil Flow Automation</h3></div>
-  </div>
-</section>
-
-<section id="skills" data-aos="fade-up">
-  <h2>Skills</h2>
-  <ul>
-    <li><strong>CFD:</strong> ANSYS Fluent, CFX, HiFUN</li>
-    <li><strong>Design:</strong> CATIA, SolidWorks, AutoCAD</li>
-    <li><strong>Programming:</strong> MATLAB, Python, C</li>
-  </ul>
-</section>
-
-<section id="gallery" data-aos="fade-up">
-  <h2>Gallery</h2>
-  <div class="gallery-grid">
-    <img src="/mnt/data/photo (1).jpg" />
+  <h2>Projects</h
