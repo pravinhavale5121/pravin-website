@@ -4,23 +4,69 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pravin Bappaji Havale - Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 <style>
- body { margin:0; font-family:Poppins, sans-serif; background:#0d1117; color:#e6edf3; }
- nav { position:fixed; top:0; width:100%; padding:1rem 8%; background:#111; display:flex; justify-content:space-between; align-items:center; z-index:20; }
- nav a { color:#e6edf3; text-decoration:none; margin-left:1.5rem; }
- header { height:100vh; background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url('hero.jpg') center/cover; display:flex; justify-content:center; align-items:center; text-align:center; padding:0 10%; }
- header h1 { font-size:4rem; margin:0; }
- .btn { padding:0.8rem 1.6rem; background:#238636; color:white; border-radius:6px; text-decoration:none; }
- section { padding:6rem 10%; }
- h2 { font-size:2.6rem; margin-bottom:2rem; }
- .grid { display:grid; gap:2rem; }
- .two { grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
- .card { background:#161b22; padding:2rem; border-radius:12px; }
- footer { padding:2rem; background:#161b22; text-align:center; margin-top:4rem; }
+  :root {
+    --bg-dark:#0d1117; --bg-card:#161b22; --text:#e6edf3;
+    --accent:#238636; --light-bg:#f7f7f7; --light-card:#fff; --light-text:#000;
+  }
+  body { margin:0; font-family:Poppins, sans-serif; background:var(--bg-dark); color:var(--text); transition:0.3s; }
+  body.light { background:var(--light-bg); color:var(--light-text);} 
+  body.light .card { background:var(--light-card);} 
+  body.light nav { background:var(--light-card);} 
+
+  /* PRELOADER */
+  #preloader { position:fixed; top:0; left:0; width:100%; height:100%; background:#000; display:flex; justify-content:center; align-items:center; z-index:200; }
+
+  /* NAV */
+  nav { position:fixed; top:0; width:100%; padding:1rem 8%; background:var(--bg-card); display:flex; justify-content:space-between; align-items:center; z-index:20; backdrop-filter:blur(10px);} 
+  nav a { color:inherit; text-decoration:none; margin-left:1.5rem; font-weight:500; position:relative; }
+  nav a::after { content:""; position:absolute; bottom:-4px; left:0; width:0%; height:2px; background:var(--accent); transition:0.3s; }
+  nav a:hover::after { width:100%; }
+
+  /* THEME BUTTON */
+  #themeToggle { position:fixed; top:20px; right:20px; padding:0.6rem 0.8rem; background:var(--accent); color:white; border:none; border-radius:6px; cursor:pointer; z-index:50; }
+
+  /* Floating Contact */
+  #contact-btn { position:fixed; bottom:25px; right:25px; background:var(--accent); padding:1rem; border-radius:50%; color:white; cursor:pointer; font-size:22px; }
+
+  /* HERO */
+  header { height:100vh; background:linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)), url('/mnt/data/photo (1).jpg') center/cover no-repeat; display:flex; justify-content:center; align-items:center; text-align:center; padding:0 10%; }
+  header h1 { font-size:4rem; margin:0; }
+  header p { font-size:1.3rem; opacity:0.8; }
+  .btn { display:inline-block; padding:0.8rem 1.6rem; background:var(--accent); color:white; border-radius:6px; text-decoration:none; font-weight:600; margin-top:1.5rem; }
+
+  section { padding:6rem 10%; scroll-margin-top:80px; }
+  h2 { font-size:2.7rem; margin-bottom:2rem; }
+
+  .grid { display:grid; gap:2rem; }
+  .two { grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+  .card { background:var(--bg-card); padding:2rem; border-radius:12px; transition:0.3s; }
+  .card:hover { transform:translateY(-6px); }
+
+  .timeline { border-left:3px solid var(--accent); padding-left:20px; }
+  .timeline-entry { margin-bottom:2rem; position:relative; }
+  .timeline-entry i { position:absolute; left:-37px; top:5px; font-size:20px; color:var(--accent); }
+
+  .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; }
+  .gallery-grid img { width:100%; border-radius:10px; }
+
+  .cert-card { background:var(--bg-card); padding:1.5rem; border-radius:12px; cursor:pointer; }
+
+  .modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:none; justify-content:center; align-items:center; z-index:100; }
+  .modal img { max-width:90%; max-height:90%; border-radius:12px; }
+
+  html { scroll-behavior:smooth; }
 </style>
 </head>
 <body>
+
+<div id="preloader"><i class="fa-solid fa-gear fa-spin" style="font-size:50px;color:white"></i></div>
+
+<button id="themeToggle"><i class="fa-solid fa-moon"></i></button>
+<div id="contact-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">✉️</div>
 
 <nav>
   <div class="logo">PBH</div>
@@ -30,57 +76,64 @@
     <a href="#internships">Internships</a>
     <a href="#projects">Projects</a>
     <a href="#skills">Skills</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#certificates">Certificates</a>
+    <a href="#nptel">NPTEL</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
-<header id="home">
+<header id="home" data-aos="fade-up">
   <div>
     <h1>Pravin Bappaji Havale</h1>
-    <p>Aeronautical Engineer | CFD | Robotics | Simulation</p>
+    <p>Aeronautical Engineer • CFD Specialist • Robotics • Simulation</p>
     <a class="btn" href="Pravin-Bappaji-Havale.pdf" download>Download CV</a>
   </div>
 </header>
 
-<section id="about">
+<section id="about" data-aos="fade-right">
   <h2>About Me</h2>
-  <p>Motivated Aeronautical Engineering student with expertise in CFD, propulsion, aerodynamics, robotics, and structural analysis.</p>
+  <p>Motivated Aeronautical Engineering student with strong foundations in CFD, Robotics, Aerodynamics, Propulsion, and Structural Analysis.</p>
 </section>
 
-<section id="internships">
+<section id="internships" data-aos="fade-left">
   <h2>Internships</h2>
   <div class="timeline">
-    <p><strong>S & I Engineering Solutions Pvt Ltd</strong> – CFD, HiFUN, ParaView</p>
-    <p><strong>Center for Robotics Research, NMIT</strong> – Robotic system design</p>
+    <div class="timeline-entry">
+      <i class="fa-solid fa-gears"></i>
+      <h3>S & I Engineering Solutions Pvt Ltd</h3>
+      <p>Grid generation • HiFUN simulations • ParaView visualization</p>
+    </div>
+    <div class="timeline-entry">
+      <i class="fa-solid fa-robot"></i>
+      <h3>Center for Robotics Research, NMIT</h3>
+      <p>Hexapod robot development • Motion control • Aerospace robotics</p>
+    </div>
   </div>
 </section>
 
-<section id="projects">
+<section id="projects" data-aos="zoom-in">
   <h2>Projects</h2>
   <div class="grid two">
-    <div class="card"><h3>Scramjet Intake CFD</h3></div>
-    <div class="card"><h3>Fin-Tube Heat Transfer</h3></div>
-    <div class="card"><h3>NACA 0018 Study</h3></div>
+    <div class="card" onclick="openModal('/mnt/data/WhatsApp Image 2025-11-14 at 17.36.20_bdb4ad1e.jpg')"><h3>Scramjet Intake CFD</h3></div>
+    <div class="card" onclick="openModal('/mnt/data/WhatsApp Image 2025-11-14 at 17.57.41_7b74c076.jpg')"><h3>Fin-Tube Heat Transfer</h3></div>
+    <div class="card"><h3>NACA 0018 Airfoil</h3></div>
     <div class="card"><h3>RIHAB Balloon</h3></div>
     <div class="card"><h3>Hexapod Robot</h3></div>
     <div class="card"><h3>Oil Flow Automation</h3></div>
   </div>
 </section>
 
-<section id="skills">
+<section id="skills" data-aos="fade-up">
   <h2>Skills</h2>
   <ul>
-    <li>CFD: HiFUN, ANSYS Fluent</li>
-    <li>Design: CATIA, SolidWorks</li>
-    <li>Programming: MATLAB, Python, C</li>
+    <li><strong>CFD:</strong> ANSYS Fluent, CFX, HiFUN</li>
+    <li><strong>Design:</strong> CATIA, SolidWorks, AutoCAD</li>
+    <li><strong>Programming:</strong> MATLAB, Python, C</li>
   </ul>
 </section>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Email: pravin@example.com</p>
-</section>
-
-<footer>© 2025 Pravin Havale</footer>
-</body>
-</html>
+<section id="gallery" data-aos="fade-up">
+  <h2>Gallery</h2>
+  <div class="gallery-grid">
+    <img src="/mnt/data/photo (1).jpg" />
